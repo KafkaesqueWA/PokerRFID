@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player Slots</title>
+<style>
+  /* General styling for the page */
+  body {
+    background-color: #333;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  /* Container for the row of player slots */
+  .player-container {
+    display: flex;
+    gap: 10px;
+  }
+
+  .player-slot {
+    width: 150px;
+    background-color: #404040;
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: filter 0.3s, opacity 0.3s;
+  }
+
+  /* White glow effect for player with action */
+  .action-on {
+    box-shadow: 0 0 10px 5px #ffffff;
+  }
+
+  /* Grayscale styling for empty slots */
+  .grayscale {
+    filter: grayscale(100%);
+    opacity: 0.6;
+  }
+
+  /* Ensure all elements inside player slots have the same width */
+  .player-slot > * {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  /* Seat number styling */
+  .seat-number {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+  }
+
+  /* Card indicator styling with muted colors and consistent height */
+  .card-indicator {
+    width: 100%;
+    height: 40px; /* Set consistent height for all indicators */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: black;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .card-green { background-color: #6db56d; }   /* Muted green */
+  .card-yellow { background-color: #e0c066; }  /* Muted yellow */
+  .card-red { background-color: #d67676; }     /* Muted red - empty for red */
+
+  /* Editable fields styling */
+  .editable-field, .position-dropdown {
+    background-color: #5a5a5a;
+    color: white;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-weight: bold; /* Make displayed text bold */
+  }
+
+  /* Dropdown styling */
+  .position-dropdown {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="player-container" id="playerContainer">
+  <!-- 10 Player Slots -->
+  <div class="player-slot" data-seat="1">
+    <div class="seat-number">1</div>
+    <div class="card-indicator card-green">🂠🂠</div>
+    <input type="text" class="editable-field" value="Rylan" readonly>
+    <input type="text" class="editable-field" value="5560" readonly>
+    <select class="position-dropdown">
+      <option value=""></option>
+      <option value="Small Blind">Small Blind</option>
+      <option value="Big Blind">Big Blind</option>
+      <option value="Dealer">Dealer</option>
+    </select>
+    <input type="text" class="editable-field" value="100" readonly>
+  </div>
+
+  <div class="player-slot grayscale" data-seat="2">
+    <div class="seat-number">2</div>
+    <div class="card-indicator card-red"></div> <!-- No cards for grayscale slot, red background -->
+    <input type="text" class="editable-field" value="" readonly>
+    <input type="text" class="editable-field" value="X" readonly>
+    <select class="position-dropdown">
+      <option value=""></option>
+      <option value="Small Blind">Small Blind</option>
+      <option value="Big Blind">Big Blind</option>
+      <option value="Dealer">Dealer</option>
+    </select>
+    <input type="text" class="editable-field" value="0" readonly>
+  </div>
+
+  <div class="player-slot grayscale" data-seat="3">
+    <div class="seat-number">3</div>
+    <div class="card-indicator card-red"></div> <!-- Empty red indicator, consistent height -->
+    <input type="text" class="editable-field" value="" readonly>
+    <input type="text" class="editable-field" value="X" readonly>
+    <select class="position-dropdown">
+      <option value=""></option>
+      <option value="Small Blind">Small Blind</option>
+      <option value="Big Blind">Big Blind</option>
+      <option value="Dealer">Dealer</option>
+    </select>
+    <input type="text" class="editable-field" value="0" readonly>
+  </div>
+
+  <div class="player-slot" data-seat="4">
+    <div class="seat-number">4</div>
+    <div class="card-indicator card-green">🂠🂠</div>
+    <input type="text" class="editable-field" value="Tully" readonly>
+    <input type="text" class="editable-field" value="10400" readonly>
+    <select class="position-dropdown">
+      <option value=""></option>
+      <option value="Small Blind">Small Blind</option>
+      <option value="Big Blind">Big Blind</option>
+      <option value="Dealer">Dealer</option>
+    </select>
+    <input type="text" class="editable-field" value="100" readonly>
+  </div>
+
+  <div class="player-slot" data-seat="5">
+    <div class="seat-number">5</div>
+    <div class="card-indicator card-green">🂠🂠</div> <!-- Finn now green with two cards -->
+    <input type="text" class="editable-field" value="Finn" readonly>
+    <input type="text" class="editable-field" value="22970" readonly>
+    <select class="position-dropdown">
+      <option value=""></option>
+      <option value="Small Blind">Small Blind</option>
+      <option value="Big Blind">Big Blind</option>
+      <option value="Dealer">Dealer</option>
+    </select>
+    <input type="text" class="editable-field" value="200" readonly>
+  </div>
+
+  <div class="player-slot" data-seat="6">
+    <div class="seat-number">6</div>
+    <div class="card-indicator card-red"></div> <!-- Empty red indicator, consistent height -->
+    <input type="text" class="editable-field" value="Jonny" readonly>
+    <input type="text" class="editable-field" value="17431" readonly>
+    <select class="position-dropdown">
+      <option value=""></option>
+      <option value="Small Blind">Small Blind</option>
+      <option value="Big Blind">Big Blind</option>
+      <option value="Dealer">Dealer</option>
+    </select>
+    <input type="text" class="editable-field" value="100" readonly>
+  </div>
+
+  <!-- Player 7 with white glow to indicate action is on them -->
+  <div class="player-slot action-on" data-seat="7">
+    <div class="seat-number">7</div>
+    <div class="card-indicator card-green">🂠🂠</div>
+    <input type="text" class="editable-field" value="Warren" readonly>
+    <input type="text" class="editable-field" value="46120" readonly>
+    <select class="position-dropdown">
+      <option value=""></option>
+      <option value="Small Blind">Small Blind</option>
+      <option value="Big Blind">Big Blind</option>
+      <option value="Dealer">Dealer</option>
+    </select>
+    <input type="text" class="editable-field" value="200" readonly>
+  </div>
+
+  <div class="player-slot" data-seat="8">
+    <div class="seat-number">8</div>
+    <div class="card-indicator card-yellow">🂠</div>
+    <input type="text" class="editable-field" value="Jackson" readonly>
+    <input type="text" class="editable-field" value="120980" readonly>
+    <select class="position-dropdown">
+      <option value=""></option>
+      <option value="Small Blind">Small Blind</option>
+      <option value="Big Blind">Big Blind</option>
+      <option value="Dealer">Dealer</option>
+    </select>
+    <input type="text" class="editable-field" value="400" readonly>
+  </div>
+
+  <div class="player-slot grayscale" data-seat="9">
+    <div class="seat-number">9</div>
+    <div class="card-indicator card-red"></div> <!-- Empty red indicator, consistent height -->
+    <input type="text" class="editable-field" value="" readonly>
+    <input type="text" class="editable-field" value="X" readonly>
+    <select class="position-dropdown">
+      <option value=""></option>
+      <option value="Small Blind">Small Blind</option>
+      <option value="Big Blind">Big Blind</option>
+      <option value="Dealer">Dealer</option>
+    </select>
+    <input type="text" class="editable-field" value="0" readonly>
+  </div>
+
+  <div class="player-slot grayscale" data-seat="10">
+    <div class="seat-number">10</div>
+    <div class="card-indicator card-red"></div> <!-- No cards for grayscale slot, red background -->
+    <input type="text" class="editable-field" value="" readonly>
+    <input type="text" class="editable-field" value="X" readonly>
+    <select class="position-dropdown">
+      <option value=""></option>
+      <option value="Small Blind">Small Blind</option>
+      <option value="Big Blind">Big Blind</option>
+      <option value="Dealer">Dealer</option>
+    </select>
+    <input type="text" class="editable-field" value="0" readonly>
+  </div>
+</div>
+
+<script>
+  // Function to make fields editable on double-click and save on blur or Enter key
+  document.querySelectorAll('.editable-field').forEach(field => {
+    field.addEventListener('dblclick', function() {
+      this.removeAttribute('readonly');
+      this.style.backgroundColor = '#ffffff';
+      this.style.color = '#000000';
+      this.focus();
+    });
+
+    field.addEventListener('blur', function() {
+      this.setAttribute('readonly', true);
+      this.style.backgroundColor = '#5a5a5a';
+      this.style.color = '#ffffff';
+    });
+
+    field.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        this.setAttribute('readonly', true);
+        this.style.backgroundColor = '#5a5a5a';
+        this.style.color = '#ffffff';
+      }
+    });
+  });
+
+  // Function to set dealer, small blind, and big blind positions
+  function setPositions(dealerSeat) {
+    const totalSeats = 10;
+    const playerSlots = document.querySelectorAll('.player-slot');
+
+    // Reset all positions to blank
+    playerSlots.forEach(slot => {
+      const dropdown = slot.querySelector('.position-dropdown');
+      dropdown.value = ""; // Reset to blank for all slots
+    });
+
+    // Calculate Small Blind and Big Blind positions
+    const smallBlindSeat = (dealerSeat % totalSeats) + 1;
+    const bigBlindSeat = (smallBlindSeat % totalSeats) + 1;
+
+    // Assign positions
+    document.querySelector(`.player-slot[data-seat="${dealerSeat}"] .position-dropdown`).value = "Dealer";
+    document.querySelector(`.player-slot[data-seat="${smallBlindSeat}"] .position-dropdown`).value = "Small Blind";
+    document.querySelector(`.player-slot[data-seat="${bigBlindSeat}"] .position-dropdown`).value = "Big Blind";
+  }
+
+  // Apply grayscale style to empty player slots and remove card icon for these slots
+  document.querySelectorAll('.player-slot').forEach(slot => {
+    const nameField = slot.querySelector('.editable-field').value;
+    if (!nameField) {
+      slot.classList.add('grayscale');
+      slot.querySelector('.card-indicator').innerHTML = ""; // Remove card icon for grayscale slots
+    }
+  });
+
+  // Set positions example (e.g., set seat 4 as the dealer)
+  setPositions(4);
+</script>
+
+</body>
+</html>
