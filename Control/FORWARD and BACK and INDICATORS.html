@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectable Indicators</title>
+    <style>
+        body {
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .indicators-container {
+            display: flex;
+            gap: 10px; /* Reduced gap between indicators */
+            margin-bottom: 20px; /* Padding between indicators and buttons */
+            width: 490px; /* Matches the outer edges of the Forward/Back buttons */
+        }
+
+        .indicator {
+            flex: 1; /* Ensures all indicators share equal width */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #555;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 14px; /* Slightly smaller text for balance */
+            font-weight: bold;
+            text-align: center;
+            height: 25px; /* Half the height of the navigation buttons */
+            border: 2px solid transparent; /* Default border */
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .indicator.active {
+            background-color: #fff;
+            color: #000;
+            border-color: #fff; /* White outline when selected */
+        }
+
+        .navigation-container {
+            display: flex;
+            gap: 25px; /* Space between Forward and Backward buttons */
+            width: 490px; /* Matches total width of indicators */
+        }
+
+        .nav-button {
+            flex: 1; /* Ensures both buttons take half the width */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            height: 50px; /* Matches original button height */
+            text-align: center;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .nav-button:hover {
+            background-color: #777;
+        }
+
+        .nav-button:active {
+            transform: scale(0.95);
+        }
+
+        .nav-button .arrow {
+            font-size: 24px; /* Adjusted for balance */
+            line-height: 1;
+            position: absolute;
+        }
+
+        .nav-button .arrow.left {
+            left: 12px;
+        }
+
+        .nav-button .arrow.right {
+            right: 12px;
+        }
+
+        .nav-button span.text {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="indicators-container">
+        <div class="indicator" id="pre-flop" onclick="selectIndicator('pre-flop')">Pre-Flop</div>
+        <div class="indicator" id="flop" onclick="selectIndicator('flop')">Flop</div>
+        <div class="indicator" id="turn" onclick="selectIndicator('turn')">Turn</div>
+        <div class="indicator" id="river" onclick="selectIndicator('river')">River</div>
+    </div>
+    <div class="navigation-container">
+        <button class="nav-button" onclick="goBackward()">
+            <span class="arrow left">⬅</span>
+            <span class="text">Back Player</span>
+        </button>
+        <button class="nav-button" onclick="goForward()">
+            <span class="text">Forward Player</span>
+            <span class="arrow right">➡</span>
+        </button>
+    </div>
+
+    <script>
+        const indicators = document.querySelectorAll(".indicator");
+
+        function selectIndicator(id) {
+            // Remove active class from all indicators
+            indicators.forEach(indicator => indicator.classList.remove("active"));
+
+            // Add active class to the selected indicator
+            const selectedIndicator = document.getElementById(id);
+            selectedIndicator.classList.add("active");
+        }
+
+        function goForward() {
+            alert("Moved to the next player!");
+        }
+
+        function goBackward() {
+            alert("Moved to the previous player!");
+        }
+    </script>
+</body>
+</html>
