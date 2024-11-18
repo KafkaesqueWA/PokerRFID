@@ -17,6 +17,56 @@
     margin: 0;
   }
 
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 50px;
+    background-color: #666;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px; /* Large font size for main text */
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #555;
+  }
+
+  .sublabel {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 10px; /* Smaller font size for sublabel */
+    background: #fff;
+    color: #333;
+    padding: 1px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .editable {
+    border: none;
+    background: transparent;
+    color: #333;
+    font-size: 10px;
+    width: 18px;
+    text-align: center;
+    font-weight: bold;
+  }
+
   /* Container for the row of player slots */
   .player-container {
     display: flex;
@@ -244,6 +294,27 @@
   </div>
 </div>
 
+<div class="button-container">
+  <button class="button">
+    Check <span class="sublabel" ondblclick="makeEditable(this)">F4</span>
+  </button>
+  <button class="button">
+    Fold <span class="sublabel" ondblclick="makeEditable(this)">F5</span>
+  </button>
+  <button class="button">
+    Bet <span class="sublabel" ondblclick="makeEditable(this)">V</span>
+  </button>
+  <button class="button">
+    Call <span class="sublabel" ondblclick="makeEditable(this)">G</span>
+  </button>
+  <button class="button">
+    Raise <span class="sublabel" ondblclick="makeEditable(this)">R</span>
+  </button>
+  <button class="button">
+    All In <span class="sublabel" ondblclick="makeEditable(this)">A</span>
+  </button>
+</div>
+
 <script>
   // Function to make fields editable on double-click and save on blur or Enter key
   document.querySelectorAll('.editable-field').forEach(field => {
@@ -301,6 +372,20 @@
 
   // Set positions example (e.g., set seat 4 as the dealer)
   setPositions(4);
+</script>
+
+<script>
+  function makeEditable(element) {
+    const currentText = element.innerText;
+    element.innerHTML = `<input type="text" class="editable" value="${currentText}" onblur="saveEditable(this)">`;
+    element.querySelector('input').focus();
+  }
+
+  function saveEditable(input) {
+    const newText = input.value || " ";
+    const parent = input.parentElement;
+    parent.innerHTML = newText;
+  }
 </script>
 
 </body>
