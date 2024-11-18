@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blinds Tab</title>
+    <style>
+        body {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .blinds-container {
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .blinds-title {
+            text-align: center;
+            background-color: #444;
+            color: #fff;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .blind-option {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #555;
+            color: #fff;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            margin: 5px 0;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 150px;
+            position: relative;
+            transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+        }
+
+        .blind-option input {
+            background: transparent;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            font-size: 16px;
+            text-align: center;
+            width: 100%;
+            outline: none;
+            cursor: text;
+        }
+
+        .blind-option:hover {
+            background-color: #777;
+        }
+
+        .blind-option.selected {
+            border-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="blinds-container">
+        <div class="blinds-title">Blinds</div>
+        <div class="blind-option" onclick="selectBlind(this)">
+            <input type="text" value="1/2" />
+        </div>
+        <div class="blind-option" onclick="selectBlind(this)">
+            <input type="text" value="5/10" />
+        </div>
+        <div class="blind-option" onclick="selectBlind(this)">
+            <input type="text" value="100/200" />
+        </div>
+        <div class="blind-option" onclick="selectBlind(this)">
+            <input type="text" value="500/1000" />
+        </div>
+    </div>
+
+    <script>
+        function selectBlind(element) {
+            // Remove "selected" class from all blind options
+            const blinds = document.querySelectorAll('.blind-option');
+            blinds.forEach(blind => {
+                blind.classList.remove('selected');
+            });
+
+            // Add "selected" class to the clicked blind option
+            element.classList.add('selected');
+        }
+    </script>
+</body>
+</html>
